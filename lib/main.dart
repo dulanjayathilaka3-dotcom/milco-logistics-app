@@ -341,12 +341,18 @@ class StoresScreen extends StatefulWidget {
 class _StoresScreenState extends State<StoresScreen> {
   final String storesSheetUrl = 'https://docs.google.com/spreadsheets/d/1R44dyfjvTnr3CxE81IwYBPDBTxW8VzvxD5TJUEmiBjY/edit?usp=sharing';
 
-  Future<void> _launchURL(String url) async {
-    final Uri uri = Uri.parse(url);
+  Future<void> _openGoogleSheet(String urlString) async {
+  final Uri uri = Uri.parse(urlString);
+  try {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      debugPrint('Could not launch $urlString');
     }
+  } catch (e) {
+    debugPrint('Error: $e');
   }
+}
 
   void _showCompleteDialog(OrderModel order, int index) {
     final remarkController = TextEditingController();
@@ -593,12 +599,18 @@ class _FactoriesScreenState extends State<FactoriesScreen> {
   final String pmfUrl = 'https://docs.google.com/spreadsheets/d/12p3L_ZjABStf6v3seKqCEeXlQrlxkgCXuYdT2qS1kMU/edit?usp=sharing';
   final String sdmfUrl = 'https://docs.google.com/spreadsheets/d/1y-0Ku5bdm5CcBEqOa2Tymuj6nAeE0eMKlombnGi5UPQ/edit?usp=sharing';
 
-  Future<void> _launchURL(String url) async {
-    final Uri uri = Uri.parse(url);
+  Future<void> _openGoogleSheet(String urlString) async {
+  final Uri uri = Uri.parse(urlString);
+  try {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      debugPrint('Could not launch $urlString');
     }
+  } catch (e) {
+    debugPrint('Error: $e');
   }
+}
 
   void _showNewRequestDialog() {
     final itemController = TextEditingController();
