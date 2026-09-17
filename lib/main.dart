@@ -599,18 +599,19 @@ class _FactoriesScreenState extends State<FactoriesScreen> {
   final String pmfUrl = 'https://docs.google.com/spreadsheets/d/12p3L_ZjABStf6v3seKqCEeXlQrlxkgCXuYdT2qS1kMU/edit?usp=sharing';
   final String sdmfUrl = 'https://docs.google.com/spreadsheets/d/1y-0Ku5bdm5CcBEqOa2Tymuj6nAeE0eMKlombnGi5UPQ/edit?usp=sharing';
 
-  Future<void> _openGoogleSheet(String urlString) async {
-  final Uri uri = Uri.parse(urlString);
-  try {
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      debugPrint('Could not launch $urlString');
+  // ගූගල් ෂීට් ලින්ක් එක ඕපන් කිරීමට අදාළ ෆන්ක්ෂන් එක මෙතැනට දාන්න
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        debugPrint('Could not launch $url');
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
     }
-  } catch (e) {
-    debugPrint('Error: $e');
   }
-}
 
   void _showNewRequestDialog() {
     final itemController = TextEditingController();
