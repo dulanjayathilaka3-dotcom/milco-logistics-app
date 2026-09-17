@@ -26,6 +26,24 @@ jobs:
     - name: Create Android Project Files
       run: flutter create --platforms=android --project-name=milco_logistics .
 
+    - name: Fix AndroidManifest for URL Launcher
+      run: |
+        python3 -c "
+        path = 'android/app/src/main/AndroidManifest.xml'
+        with open(path, 'r') as f:
+            content = f.read()
+        queries_tag = '''    <queries>
+                <intent>
+                    <action android:name='android.intent.action.VIEW' />
+                    <data android:scheme='https' />
+                </intent>
+            </queries>
+        '''
+        content = content.replace('<application', queries_tag + '\n    <application')
+        with open(path, 'w') as f:
+            f.write(content)
+        "
+
     - name: Install Dependencies
       run: flutter pub get
 
