@@ -23,8 +23,7 @@ jobs:
         flutter-version: '3.19.0'
         channel: 'stable'
 
-    # android ෆෝල්ඩර් එක නැති නිසා project එක recreate කරනවා
-    - - name: Create Android Project Files
+    - name: Create Android Project Files
       run: flutter create --platforms=android --project-name=milco_logistics .
 
     - name: Install Dependencies
